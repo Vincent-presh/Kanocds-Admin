@@ -30,8 +30,7 @@ class Support extends React.Component {
                       <div className="card-body">
                         <h5 className="card-title">Abba</h5>
                         <p className="card-text">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit.
+                          Voice and SMS
                         </p>
                         <p className="card-text">
                           <small className="text-muted">08136784544</small>
@@ -54,7 +53,7 @@ class Support extends React.Component {
                     <div className="col-md-8">
                       <div className="card-body">
                         <h5 className="card-title">Ibrahim</h5>
-                        <p className="card-text">Voice and Sms</p>
+                        <p className="card-text">Voice and SMS</p>
                         <p className="card-text">
                           <small className="text-muted">08136784544</small>
                         </p>

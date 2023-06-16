@@ -1,12 +1,14 @@
 import React from "react";
+import cookie from "react-cookies";
 
 class SideBar extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       someKey: "someValue",
     };
   }
+  componentDidMount() {}
 
   render() {
     return (
@@ -28,6 +30,14 @@ class SideBar extends React.Component {
 
         <ul className="metismenu" id="menu">
           <li>
+            <a className="" href="/contributors">
+              <div className="parent-icon">
+                <i className="bi bi-receipt"></i>
+              </div>
+              <div className="menu-title">View Contributors</div>
+            </a>
+          </li>
+          <li>
             <a className="has-arrow" href="javascript:;">
               <div className="parent-icon">
                 <i className="bi bi-receipt"></i>
@@ -37,7 +47,12 @@ class SideBar extends React.Component {
             <ul>
               <li>
                 <a href="/">
-                  <i className="bi bi-circle"></i>New Donation
+                  <i className="bi bi-circle"></i>View Donations
+                </a>
+              </li>
+              <li>
+                <a href="/direct">
+                  <i className="bi bi-circle"></i>Direct Donations
                 </a>
               </li>
               <li>
@@ -50,12 +65,15 @@ class SideBar extends React.Component {
                   <i className="bi bi-circle"></i>Expertise Contribution
                 </a>
               </li>
-              <li>
-                <a href="/view-contributions">
-                  <i className="bi bi-circle"></i> View Contributions
-                </a>
-              </li>
             </ul>
+          </li>
+          <li>
+            <a className="" href="/Contact-messages">
+              <div className="parent-icon">
+                <i className="bi bi-person-lines-fill"></i>
+              </div>
+              <div className="menu-title">Contact Messages</div>
+            </a>
           </li>
           <li>
             <a className="has-arrow" href="/profile">
@@ -75,7 +93,7 @@ class SideBar extends React.Component {
             </a>
             <ul>
               <li>
-                <a href="/fund">
+                <a href="/projects">
                   <i className="bi bi-circle"></i>All Projects
                 </a>
               </li>
@@ -99,14 +117,13 @@ class SideBar extends React.Component {
             </a>
           </li>
         </ul>
+        <div class="breadcrumb-item active px-4 mt-4 pt-4 mb-4">
+          <b>Powered By KanoCDS</b>
+          <br />
+          KANOCDS Admin
+        </div>
       </aside>
     );
-  }
-
-  componentDidMount() {
-    this.setState({
-      someKey: "otherValue",
-    });
   }
 }
 

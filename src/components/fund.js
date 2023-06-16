@@ -1,14 +1,82 @@
 import React from "react";
 import DatePicker from "react-datepicker";
-
+import { toast, ToastContainer } from "react-toastify";
 import "react-datepicker/dist/react-datepicker.css";
+import { WEB_BASE_URL } from "./webbase";
+import cookie from "react-cookies";
+import qs from "qs";
+import axios from "axios";
 
 class Fund extends React.Component {
   constructor() {
     super();
     this.state = {
-      someKey: "someValue",
+      token: cookie.load("token"),
+      date: new Date(),
+      accountName: "",
+      transactionType: "",
+      amount: 0,
+      contributionType: "monetary",
     };
+
+    this.setStartDate = this.setStartDate.bind(this);
+    this.mytransTypeHandler = this.mytransTypeHandler.bind(this);
+    this.myAmountHandler = this.myAmountHandler.bind(this);
+    this.myAccountNameHandler = this.myAccountNameHandler.bind(this);
+  }
+  setStartDate(date) {
+    this.setState({
+      date: date,
+    });
+  }
+
+  myAccountNameHandler(event) {
+    this.setState({
+      accountName: event.target.value,
+    });
+  }
+
+  myAmountHandler(event) {
+    this.setState({
+      amount: event.target.value,
+    });
+  }
+
+  mytransTypeHandler = (selectedOption) => {
+    this.setState({ transactionType: selectedOption.value });
+  };
+
+  onSubmit(event) {
+    event.preventDefault();
+    const id = toast.loading("Please wait...");
+
+    axios
+      .post(
+        WEB_BASE_URL + "/user/makeDonation.php",
+        qs.stringify({
+          accountName: this.state.accountName,
+          amount: this.state.amount,
+          take_key: this.state.token,
+        })
+      )
+      .then((res) => {
+        if (res.data.status === "success") {
+          console.log(res.data);
+        } else {
+          console.log(res);
+          toast.update(id, {
+            render: res.data.error,
+            type: "error",
+            isLoading: false,
+          });
+          setTimeout(() => {
+            toast.dismiss(id);
+          }, 2000);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -43,21 +111,39 @@ class Fund extends React.Component {
 
                 <div className="col">
                   <div className="card radius-15">
-                    <div className="card-body">
+                    <div className="card-body" style={{ lineHeight: "1.5rem" }}>
                       <h4 className="card-title text-muted">
                         Step 1 Make Transfer to CDS Bank Account
                       </h4>
                       <hr />
                       <p className="card-text">
-                        Make Payment to CDS Bank Account below:
+                        Make payment to the relevant CDS Bank Account below:
                       </p>
                       <p className="card-text">
-                        Account Name: <i>KANOCDS</i>
+                        <b>Payments in Nigerian Naira:</b> <br /> Account Name:{" "}
+                        <i>
+                          Green Horizon Community Support Initiative (Kano CDS)
+                        </i>
+                        <br />
+                        Account Number: <i>0002383555</i>
+                        <br></br>
+                        Bank Name: Taj Bank.
                       </p>
                       <p className="card-text">
-                        Account Number: <i>0098675635</i> Wema Bank
+                        <b>Payments in foreign currency:</b>
+                        <i>
+                          <br /> Account Name: Green Horizon Community Support
+                          Initiative (Kano CDS)
+                        </i>
+                        <br />
+                        Account Number: <i>0002383672</i>
+                        <br></br>
+                        Bank Name: Taj Bank
+                        <br></br>
+                        Swift code: TAJJNGLA
+                        <br></br>
+                        Sort code: 302120031
                       </p>
-                      <p className="card-text">Bank Name: Wema Bank</p>
                     </div>
                   </div>
                 </div>
@@ -86,14 +172,19 @@ class Fund extends React.Component {
                         Send Transfer Details to CDS
                       </h4>
                       <p className="card-text">
-                        <form className="row g-3">
+                        <form
+                          className="row g-3"
+                          onSubmit={(event) => this.onSubmit(event)}
+                        >
                           <div className="col-12">
                             <label className="form-label">Account Name</label>
                             <input
-                              onChange={(event) => {}}
+                              onChange={(event) => {
+                                this.myAccountNameHandler(event);
+                              }}
                               type="text"
                               className="form-control"
-                              value={""}
+                              value={this.state.accountName}
                             />
                           </div>
                           <div className="col-12">
@@ -132,18 +223,20 @@ class Fund extends React.Component {
                               Amount (in Naira)
                             </label>
                             <input
-                              onChange={(event) => {}}
+                              onChange={(event) => {
+                                this.myAmountHandler(event);
+                              }}
                               type="number"
                               className="form-control"
-                              value={""}
+                              value={this.state.amount}
                             />
                           </div>
                           <div className="col-6">
                             <label className="form-label">Transfer Date</label>
                             <DatePicker
-                              selected={this.state.endDate}
-                              onSelect={(date) => this.setEndDate(date)}
-                              onChange={(date) => this.setEndDate(date)}
+                              selected={this.state.date}
+                              onSelect={(date) => this.setStartDate(date)}
+                              onChange={(date) => this.setStartDate(date)}
                             />
                           </div>
                         </form>

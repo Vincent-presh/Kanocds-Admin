@@ -12,6 +12,7 @@ class Donate extends React.Component {
       name: "",
       state: "",
       phone: "",
+      amount: "",
       lgas: "",
       locationOptions: [
         { value: "Merchant", label: "Merchant" },
@@ -65,57 +66,69 @@ class Donate extends React.Component {
   }
 
   getStateOptions(country) {
-    axios
-      .get(WEB_BASE_URL + "/user/getStates.php?country_id=" + country)
-      .then((res) => {
-        if (res.data.status === "success") {
-          let states = [];
+    if (country === "Nigeria") {
+      axios
+        .get(WEB_BASE_URL + "/user/getStates.php?country_id=" + country)
+        .then((res) => {
+          if (res.data.status === "success") {
+            let states = [];
 
-          for (let state in res.data.states) {
-            states.push({
-              value: res.data.states[state].name,
-              label: res.data.states[state].name,
+            for (let state in res.data.states) {
+              states.push({
+                value: res.data.states[state].name,
+                label: res.data.states[state].name,
+              });
+            }
+
+            this.setState({ statesOptions: states });
+          } else {
+            console.log(res);
+            this.setState({
+              statesOptions: [{ value: "No State", label: "No State" }],
             });
           }
-
-          this.setState({ statesOptions: states });
-        } else {
-          console.log(res);
-          this.setState({
-            statesOptions: [{ value: "No State", label: "No State" }],
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      this.setState({
+        statesOptions: [{ value: "No State", label: "No State" }],
       });
+    }
   }
 
   getLgaOptions(state) {
-    console.log(state);
-    axios
-      .get(WEB_BASE_URL + "/user/getlocalGa.php?state_id=" + state)
-      .then((res) => {
-        if (res.data.status === "success") {
-          let lgas = [];
-          for (let lga in res.data.lgas) {
-            lgas.push({
-              value: res.data.lgas[lga].name,
-              label: res.data.lgas[lga].name,
+    if (this.state.country === "Nigeria") {
+      console.log(state);
+      axios
+        .get(WEB_BASE_URL + "/user/getlocalGa.php?state_id=" + state)
+        .then((res) => {
+          if (res.data.status === "success") {
+            let lgas = [];
+            for (let lga in res.data.lgas) {
+              lgas.push({
+                value: res.data.lgas[lga].name,
+                label: res.data.lgas[lga].name,
+              });
+            }
+
+            this.setState({ lgasOptions: lgas });
+          } else {
+            this.setState({
+              lgasOptions: [{ value: "No LGA", label: "No LGA" }],
             });
           }
-
-          this.setState({ lgasOptions: lgas });
-        } else {
-          this.setState({
-            lgasOptions: [{ value: "No LGA", label: "No LGA" }],
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
+
+  myAmountHandler = (event) => {
+    this.setState({ amount: event.target.value });
+  };
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -129,6 +142,8 @@ class Donate extends React.Component {
       lga: this.state.lgas,
       phone: this.state.phone,
     };
+
+    console.log(user);
   };
 
   componentDidMount() {
@@ -170,8 +185,8 @@ class Donate extends React.Component {
                   </div>
                   <div className="col-lg-6">
                     <div className="card-body p-4 p-sm-5">
-                      <h5 className="card-title">Sign Up</h5>
-                      <p className="card-text mb-2">Register to get started!</p>
+                      <h5 className="card-title">Donate</h5>
+                      <p className="card-text mb-2">Lend a helping Hand!!</p>
                       <form
                         className="form-body"
                         onSubmit={(event) => {
@@ -224,6 +239,26 @@ class Donate extends React.Component {
                                 className="form-control radius-30 ps-5"
                                 id="inputEmailAddress"
                                 placeholder="Email Address"
+                                onChange={(event) => {
+                                  this.setState({ email: event.target.value });
+                                }}
+                              />
+                            </div>
+                          </div>
+                          <div className="col-12 ">
+                            <div className="ms-auto position-relative">
+                              <div className="position-absolute top-50 translate-middle-y search-icon px-3">
+                                <i className="bi bi-cash"></i>
+                              </div>
+                              <input
+                                type="text"
+                                className="form-control radius-30 ps-5"
+                                id="inputMerchantName"
+                                placeholder="Amount to donate (in NGN)"
+                                value={this.state.amount}
+                                onChange={(event) => {
+                                  this.setState({ amount: event.target.value });
+                                }}
                               />
                             </div>
                           </div>
@@ -262,32 +297,6 @@ class Donate extends React.Component {
                             </div>
                           </div>
 
-                          <div className="col-12">
-                            <div className="ms-auto position-relative">
-                              <div className="position-absolute top-50 translate-middle-y search-icon px-3">
-                                <i className="bi bi-lock-fill"></i>
-                              </div>
-                              <input
-                                type="password"
-                                className="form-control radius-30 ps-5"
-                                id="inputChoosePassword"
-                                placeholder="Enter Password"
-                              />
-                            </div>
-                          </div>
-                          <div className="col-12">
-                            <div className="ms-auto position-relative">
-                              <div className="position-absolute top-50 translate-middle-y search-icon px-3">
-                                <i className="bi bi-lock-fill"></i>
-                              </div>
-                              <input
-                                type="password"
-                                className="form-control radius-30 ps-5"
-                                id="inputChoosePassword"
-                                placeholder="Confirm Password"
-                              />
-                            </div>
-                          </div>
                           <div className="col-12">
                             <div className="form-check form-switch">
                               <input

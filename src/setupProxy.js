@@ -6,6 +6,13 @@ module.exports = function (app) {
     createProxyMiddleware({
       target: "https://api.kanocds.org",
       changeOrigin: true,
+      pathRewrite: {
+        '^/api': '',
+      },
+      headers: {
+        Connection: 'keep-alive',
+      },
     })
   );
+  //https://api.kanocds.org
 };

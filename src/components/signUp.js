@@ -8,11 +8,16 @@ class SignUp extends React.Component {
     super(props);
 
     this.state = {
+      email: "",
+      phone: "",
+      name: "",
       country: "",
       name: "",
       state: "",
       phone: "",
       lgas: "",
+      password: "",
+      confirmPassword: "",
       locationOptions: [
         { value: "Merchant", label: "Merchant" },
         { value: "Agent", label: "Agent" },
@@ -122,12 +127,12 @@ class SignUp extends React.Component {
     //user from state
     const user = {
       name: this.state.name,
+      phone: this.state.phone,
       email: this.state.email,
       password: this.state.password,
       country: this.state.country,
       state: this.state.state,
       lga: this.state.lgas,
-      phone: this.state.phone,
     };
     this.state.history.push("/complete-signUp", user);
   };
@@ -225,6 +230,9 @@ class SignUp extends React.Component {
                                 className="form-control radius-30 ps-5"
                                 id="inputEmailAddress"
                                 placeholder="Email Address"
+                                onChange={(event) => {
+                                  this.setState({ email: event.target.value });
+                                }}
                               />
                             </div>
                           </div>
@@ -273,6 +281,11 @@ class SignUp extends React.Component {
                                 className="form-control radius-30 ps-5"
                                 id="inputChoosePassword"
                                 placeholder="Enter Password"
+                                onChange={(event) => {
+                                  this.setState({
+                                    password: event.target.value,
+                                  });
+                                }}
                               />
                             </div>
                           </div>
@@ -286,32 +299,22 @@ class SignUp extends React.Component {
                                 className="form-control radius-30 ps-5"
                                 id="inputChoosePassword"
                                 placeholder="Confirm Password"
+                                onChange={(event) => {
+                                  this.setState({
+                                    confirmPassword: event.target.value,
+                                  });
+                                }}
                               />
                             </div>
                           </div>
-                          <div className="col-12">
-                            <div className="form-check form-switch">
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                id="flexSwitchCheckChecked"
-                              />
-                              <label
-                                className="form-check-label"
-                                for="flexSwitchCheckChecked"
-                              >
-                                I Agree to the{" "}
-                                <a href="/signUp">Terms & Conditions</a>
-                              </label>
-                            </div>
-                          </div>
+
                           <div className="col-12">
                             <div className="d-grid">
                               <button
                                 type="submit"
                                 className="btn btn-primary radius-30"
                               >
-                                Register
+                                Next
                               </button>
                             </div>
                           </div>

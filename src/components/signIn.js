@@ -1,4 +1,9 @@
+import axios from "axios";
 import React from "react";
+import cookie from "react-cookies";
+import { toast, ToastContainer } from "react-toastify";
+import { WEB_BASE_URL } from "./webbase";
+import qs from "qs";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -6,11 +11,74 @@ class SignIn extends React.Component {
     console.log(props);
     this.state = {
       history: this.props.history,
+      email: "",
+      password: "",
     };
+
+    //bind Function
+    this.onSubmit = this.onSubmit.bind(this);
   }
+
+  onSubmit = (event) => {
+    event.preventDefault();
+    const id = toast.loading("Please wait...");
+
+    axios
+      .post(
+        WEB_BASE_URL + "/admin/login.php",
+        qs.stringify({
+          email: this.state.email,
+          password: this.state.password,
+        })
+      )
+      .then((res) => {
+        if (res.data.status === "success") {
+          cookie.save("token", res.data.token, {
+            path: "/",
+            expires: new Date(Date.now() + 60 * 60 * 1000),
+          });
+          cookie.save("user", res.data.userId, {
+            path: "/",
+            expires: new Date(Date.now() + 60 * 60 * 1000),
+          });
+
+          this.state.history.push("/");
+        } else {
+          console.log(res);
+          toast.update(id, {
+            render: res.data.error,
+            type: "error",
+            isLoading: false,
+          });
+          setTimeout(() => {
+            toast.dismiss(id);
+          }, 2000);
+        }
+      })
+      .catch((err) => {
+        toast.update(id, {
+          render: "" + err,
+          type: "error",
+          isLoading: false,
+        });
+        console.log(err);
+      });
+  };
+
   render() {
     return (
       <div class="">
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <main class="authentication-content">
           <div class="container-fluid">
             <div class="authentication-card">
@@ -26,13 +94,12 @@ class SignIn extends React.Component {
                   </div>
                   <div class="col-lg-6">
                     <div class="card-body p-4 p-sm-5">
-                      <h5 class="card-title">Sign In</h5>
+                      <h5 class="card-title"> ADMIN Sign In</h5>
                       <p class="card-text mb-2">Login to to get started!</p>
                       <form
                         class="form-body"
                         onSubmit={(event) => {
-                          event.preventDefault();
-                          this.state.history.push("/");
+                          this.onSubmit(event);
                         }}
                       >
                         <div class="row g-3">
@@ -42,11 +109,14 @@ class SignIn extends React.Component {
                                 <i class="bi bi-person-circle"></i>
                               </div>
                               <input
-                                type="phone"
+                                type="email"
                                 class="form-control radius-30 ps-5"
                                 id="inputEmailAddress"
-                                placeholder="Phone Number"
+                                placeholder="Email"
                                 required={true}
+                                onChange={(event) => {
+                                  this.setState({ email: event.target.value });
+                                }}
                               />
                             </div>
                           </div>
@@ -61,28 +131,17 @@ class SignIn extends React.Component {
                                 id="inputChoosePassword"
                                 placeholder="Enter Password"
                                 required={true}
+                                onChange={(event) => {
+                                  this.setState({
+                                    password: event.target.value,
+                                  });
+                                }}
                               />
                             </div>
                           </div>
-                          <div class="col-6">
-                            <div class="form-check form-switch">
-                              <input
-                                class="form-check-input"
-                                type="checkbox"
-                                id="flexSwitchCheckChecked"
-                                checked=""
-                              />
-                              <label
-                                class="form-check-label"
-                                for="flexSwitchCheckChecked"
-                              >
-                                Remember Me
-                              </label>
-                            </div>
-                          </div>
-                          <div class="col-6 text-end">
+                          <div class="col-6 ">
                             {" "}
-                            <a href="forgot-password.html">Forgot Password ?</a>
+                            <a href="/forgot-password">Forgot Password ?</a>
                           </div>
                           <div class="col-12">
                             <div class="d-grid">
@@ -93,12 +152,6 @@ class SignIn extends React.Component {
                                 Sign In
                               </button>
                             </div>
-                          </div>
-                          <div class="col-12">
-                            <p class="mb-0">
-                              Don't have an account yet?{" "}
-                              <a href="/signUp">Sign up here</a>
-                            </p>
                           </div>
                         </div>
                       </form>
@@ -113,7 +166,7 @@ class SignIn extends React.Component {
     );
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 }
 
 export default SignIn;

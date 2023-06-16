@@ -14,6 +14,10 @@ import EditTransactionPin from "./EditTransactionPin";
 import Vouchers from "./vouchers";
 import GenerateVoucher from "./generateVoucher";
 import CreateUser from "./CreateUser";
+import cookie from "react-cookies";
+import Material from "./material";
+import Directdonations from "./directDonations";
+import Messages from "./messages";
 
 class Dashboard extends React.Component {
   constructor() {
@@ -21,6 +25,14 @@ class Dashboard extends React.Component {
     this.state = {
       someKey: "someValue",
     };
+  }
+
+  componentDidMount() {
+    const user = cookie.load("user");
+    console.log(cookie.load("token"));
+    if (!user) {
+      this.props.history.push("/signIn");
+    }
   }
 
   render() {
@@ -31,16 +43,23 @@ class Dashboard extends React.Component {
         <Switch>
           <Route
             exact
+            key={2}
             path="/"
-            key={1}
-            render={(routerProps) => <Fund></Fund>}
+            render={(routerProps) => <Transaction></Transaction>}
           />
           <Route
             exact
-            key={2}
-            path="/view-contributions"
-            render={(routerProps) => <Transaction></Transaction>}
+            key={10}
+            path="/direct"
+            render={(routerProps) => <Directdonations></Directdonations>}
           />
+          <Route
+            exact
+            key={10}
+            path="/Contact-messages"
+            render={(routerProps) => <Messages></Messages>}
+          />
+
           <Route
             exact
             key={3}
@@ -50,7 +69,7 @@ class Dashboard extends React.Component {
           <Route
             exact
             key={4}
-            path="/users"
+            path="/contributors"
             render={(routerProps) => <Users></Users>}
           />
 
@@ -60,17 +79,25 @@ class Dashboard extends React.Component {
             path="/support"
             render={(routerProps) => <Support></Support>}
           />
-          <Route
-            exact
-            key={7}
-            path="/wallet-history"
-            render={(routerProps) => <WalletHistory></WalletHistory>}
-          />
+
           <Route
             exact
             key={8}
-            path="/transfer-fund"
-            render={(routerProps) => <TransferFund></TransferFund>}
+            path="/material"
+            render={(routerProps) => <Material></Material>}
+          />
+
+          <Route
+            exact
+            key={11}
+            path="/expertise"
+            render={(routerProps) => <Material></Material>}
+          />
+          <Route
+            exact
+            key={12}
+            path="/projects"
+            render={(routerProps) => <Material></Material>}
           />
 
           <Route
@@ -79,33 +106,9 @@ class Dashboard extends React.Component {
             path="/edit-transaction-pin"
             render={(routerProps) => <EditTransactionPin></EditTransactionPin>}
           />
-          <Route
-            exact
-            key={10}
-            path="/vouchers"
-            render={(routerProps) => <Vouchers></Vouchers>}
-          />
-          <Route
-            exact
-            key={11}
-            path="/generate-voucher"
-            render={(routerProps) => <GenerateVoucher></GenerateVoucher>}
-          />
-          <Route
-            exact
-            key={12}
-            path="/create-users"
-            render={(routerProps) => <CreateUser></CreateUser>}
-          />
         </Switch>
       </div>
     );
-  }
-
-  componentDidMount() {
-    this.setState({
-      someKey: "otherValue",
-    });
   }
 }
 

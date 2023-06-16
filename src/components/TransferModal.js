@@ -42,11 +42,11 @@ class TransferModal extends React.Component {
                   />
                 </div>
                 <div className="col-12">
-                  <label className="form-label">Amount (in Naira)</label>
+                  <label className="form-label">Subject</label>
                   <input
-                    type="number"
+                    type="text"
                     className="form-control"
-                    value={this.props.amount}
+
                   />
                 </div>
               </form>
