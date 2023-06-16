@@ -2,7 +2,7 @@
 
 .card {
   border: 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.3rem;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
@@ -23,7 +23,7 @@
 /* Background Colors */
 
 .bg-primary {
-  background-color: #263f8c !important;
+  background-color: #268c48 !important;
 }
 
 .bg-danger {
@@ -318,13 +318,13 @@
 
 .btn-primary {
   color: #fff;
-  background-color: #263f8c;
-  border-color: #263f8c;
+  background-color: #127a20;
+  border-color: #0dfdb5;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #263f8c;
-  border-color: #263f8c;
+  background-color: #1caa2f;
+  border-color: #0bc48c;
 }
 .btn-check:focus + .btn-primary,
 .btn-primary:focus {

@@ -96,7 +96,7 @@ class Profile extends React.Component {
                   <div class="card-body">
                     <form class="row g-3">
                       <div class="col-6">
-                        <label class="form-label">Merchant Name</label>
+                        <label class="form-label">Full Name</label>
                         <input
                           type="text"
                           class="form-control"
@@ -170,16 +170,6 @@ class Profile extends React.Component {
           <div class="col-12 col-lg-4">
             <div class="card shadow-sm border-0 overflow-hidden">
               <div class="card-body">
-                <div class="profile-avatar text-center">
-                  <img
-                    src="assets/images/avatars/avatar-1.png"
-                    class="rounded-circle shadow"
-                    width="120"
-                    height="120"
-                    alt=""
-                  />
-                </div>
-
                 <div class="text-center mt-4">
                   <h4 class="mb-1">Jhon Deo, 27</h4>
 

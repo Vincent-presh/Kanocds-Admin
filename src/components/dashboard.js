@@ -33,12 +33,12 @@ class Dashboard extends React.Component {
             exact
             path="/"
             key={1}
-            render={(routerProps) => <Main></Main>}
+            render={(routerProps) => <Fund></Fund>}
           />
           <Route
             exact
             key={2}
-            path="/transactions"
+            path="/view-contributions"
             render={(routerProps) => <Transaction></Transaction>}
           />
           <Route
@@ -53,12 +53,7 @@ class Dashboard extends React.Component {
             path="/users"
             render={(routerProps) => <Users></Users>}
           />
-          <Route
-            exact
-            key={5}
-            path="/fund"
-            render={(routerProps) => <Fund></Fund>}
-          />
+
           <Route
             exact
             key={6}

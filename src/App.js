@@ -6,6 +6,8 @@ import "./App.css";
 import SignUp from "./components/signUp";
 import SignIn from "./components/signIn";
 import Dashboard from "./components/dashboard";
+import Complete from "./components/Complete";
+import Donate from "./components/donate";
 function App() {
   return (
     <div>
@@ -13,6 +15,8 @@ function App() {
         <Switch>
           <Route exact path="/signUp" component={SignUp} />
           <Route exact path="/signIn" component={SignIn} />
+          <Route exact path="/donate" component={Donate} />
+          <Route exact path="/complete-signUp" component={Complete} />
           <Route path="/" component={Dashboard} />
         </Switch>
       </Router>

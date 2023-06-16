@@ -1,4 +1,7 @@
 import React from "react";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 class Fund extends React.Component {
   constructor() {
@@ -11,39 +14,15 @@ class Fund extends React.Component {
   render() {
     return (
       <main className="page-content">
-        <div className="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-          <div className="ps-3">
-            <nav aria-label="breadcrumb">
-              <ol className="breadcrumb mb-0 p-0">
-                <li className="breadcrumb-item">
-                  <a href="javascript:;">
-                    <i className="bx bx-home-alt"></i>
-                  </a>
-                </li>
-                <li className="breadcrumb-item active" aria-current="page">
-                  Fund Wallet
-                </li>
-              </ol>
-            </nav>
-          </div>
-          <div className="ms-auto">
-            <div className="btn-group">
-              <button type="button" className="btn btn-primary">
-                Wallet Balance: $200
-              </button>
-            </div>
-          </div>
-        </div>
-
         <div className="">
           <div className="">
             <div className="container py-2">
-              <h2
+              <h3
                 className="font-weight-light text-left text-muted"
                 style={{ paddingLeft: "6.7%" }}
               >
-                Fund Your Wallet
-              </h2>
+                Contribution Payment
+              </h3>
 
               <div className="row">
                 <div className="col-auto text-center flex-column d-none d-sm-flex">
@@ -62,23 +41,23 @@ class Fund extends React.Component {
                   </div>
                 </div>
 
-                <div className="col py-2">
+                <div className="col">
                   <div className="card radius-15">
                     <div className="card-body">
                       <h4 className="card-title text-muted">
-                        Step 1 Transfer to Bank Account
+                        Step 1 Make Transfer to CDS Bank Account
                       </h4>
                       <hr />
                       <p className="card-text">
-                        Fund your TopUpBox wallet by transferring funds(Naira)
-                        via local bank
+                        Make Payment to CDS Bank Account below:
                       </p>
                       <p className="card-text">
-                        <i>0098675635</i> Wema Bank
+                        Account Name: <i>KANOCDS</i>
                       </p>
                       <p className="card-text">
-                        Account Name: <i>ZEEDLABS</i>
+                        Account Number: <i>0098675635</i> Wema Bank
                       </p>
+                      <p className="card-text">Bank Name: Wema Bank</p>
                     </div>
                   </div>
                 </div>
@@ -104,7 +83,7 @@ class Fund extends React.Component {
                   <div className="card border-primary shadow radius-15">
                     <div className="card-body">
                       <h4 className="card-title text-primary">
-                        Step 2 Fill in Transfer Details
+                        Send Transfer Details to CDS
                       </h4>
                       <p className="card-text">
                         <form className="row g-3">
@@ -119,6 +98,37 @@ class Fund extends React.Component {
                           </div>
                           <div className="col-12">
                             <label className="form-label">
+                              Transaction Type
+                            </label>
+                            <select
+                              className="form-select"
+                              aria-label="Default select example"
+                              value={this.props.formRole}
+                              onChange={(event) =>
+                                this.props.onChangeRole(event)
+                              }
+                            >
+                              <option selected=""> Select Type</option>
+                              <option value="Transfer">Transfer</option>
+                              <option value="Cash">Cash</option>
+                              <option value="eNaira">eNaira</option>
+                              <option value="POS">POS</option>
+                              <option value="Bank Transfer">
+                                Bank Transfer
+                              </option>
+                              <option value="Online Transfer">
+                                Online Transfer
+                              </option>
+                              <option value="Wire">Wire</option>
+                              <option value="Western Union">
+                                Western Union
+                              </option>
+                              <option value="MoneyGram">MoneyGram</option>
+                              <option value="Other">Other</option>
+                            </select>
+                          </div>
+                          <div className="col-12">
+                            <label className="form-label">
                               Amount (in Naira)
                             </label>
                             <input
@@ -128,10 +138,18 @@ class Fund extends React.Component {
                               value={""}
                             />
                           </div>
+                          <div className="col-6">
+                            <label className="form-label">Transfer Date</label>
+                            <DatePicker
+                              selected={this.state.endDate}
+                              onSelect={(date) => this.setEndDate(date)}
+                              onChange={(date) => this.setEndDate(date)}
+                            />
+                          </div>
                         </form>
                       </p>
-                      <button className="btn btn-sm btn-primary" type="button">
-                        Submit For Confirmation
+                      <button className="btn btn-md btn-primary" type="button">
+                        Send to CDS
                       </button>
                     </div>
                   </div>
@@ -160,7 +178,7 @@ class Fund extends React.Component {
                       <h4 className="card-title">
                         Step 3 Wait For Confirmation
                       </h4>
-                      <p>Wait For Confirmation Mail</p>
+                      <p>Wait For Confirmation Mail via Email or SMS</p>
                     </div>
                   </div>
                 </div>

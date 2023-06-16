@@ -123,6 +123,7 @@ class GenerateVoucher extends React.Component {
                 <input
                   type="number"
                   class="form-control"
+                  minValue={500}
                   value={this.state.unitAmount}
                   onChange={(event) => this.setUnitAmount(event)}
                   required

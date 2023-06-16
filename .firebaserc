@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "kanocds"
+  },
+  "targets": {
+    "kanocds": {
+      "hosting": {
+        "staging": [
+          "kanocds-home"
+        ]
+      }
+    }
+  }
+}

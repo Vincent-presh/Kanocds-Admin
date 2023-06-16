@@ -24,11 +24,11 @@ File: style.css
 /* General */
 
 body {
-  font-size: 14px;
+  font-size: 13px;
   color: #4c5258;
   letter-spacing: 0.5px;
   font-family: Roboto, sans-serif;
-  background-color: #f7f8fa;
+  background-color: #ffffff;
   overflow-x: hidden;
 }
 
@@ -384,13 +384,13 @@ a {
   margin-left: 10px;
   margin-bottom: 0;
   letter-spacing: 1px;
-  color: #263f8c;
+  color: #127a20;
 }
 
 .toggle-icon {
   font-size: 26px;
   cursor: pointer;
-  color: #263f8c;
+  color: #127a20;
 }
 
 .sidebar-wrapper ul {
@@ -491,10 +491,10 @@ a {
 .sidebar-wrapper .metismenu a:active,
 .sidebar-wrapper .metismenu a:focus,
 .sidebar-wrapper .metismenu a:hover {
-  color: #263f8c;
+  color: #127a20;
   text-decoration: none;
   background-color: rgb(255 255 255);
-  border-left: 4px solid #263f8c;
+  border-left: 4px solid #127a20;
   box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
 }
 
@@ -551,7 +551,7 @@ a {
   }
   .wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .metismenu a {
     justify-content: center;
-    border-left: 0px solid #263f8c;
+    border-left: 0px solid #127a20;
   }
   .wrapper.toggled:not(.sidebar-hovered)
     .sidebar-wrapper
@@ -657,7 +657,7 @@ a {
 
 .fm-menu .list-group a:hover {
   background-color: rgb(52 97 255 / 15%);
-  color: #263f8c;
+  color: #127a20;
   transition: all 0.2s ease-out;
 }
 

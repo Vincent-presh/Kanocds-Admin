@@ -45,13 +45,6 @@ class Transaction extends React.Component {
               </ol>
             </nav>
           </div>
-          <div className="ms-auto">
-            <div className="btn-group">
-              <button type="button" className="btn btn-primary">
-                Wallet Balance: $200
-              </button>
-            </div>
-          </div>
         </div>
 
         <div className="card">
@@ -140,9 +133,11 @@ class Transaction extends React.Component {
               >
                 <thead>
                   <tr>
-                    <th>User</th>
-                    <th>Batch ID</th>
+                    <th>Name</th>
+                    <th>Contribution type</th>
+                    <th>Transaction type</th>
                     <th>Transaction date</th>
+                    <th>Status</th>
                     <th>Amount</th>
                   </tr>
                 </thead>
@@ -155,17 +150,24 @@ class Transaction extends React.Component {
                       ></i>
                       Tiger Nixon
                     </td>
-                    <td>#2345</td>
-
+                    <td>Monetary</td>
+                    <td>Transfer</td>
                     <td>2011/04/25</td>
+                    <td>
+                      <span class="badge rounded-pill alert-success">
+                        Confirmed
+                      </span>
+                    </td>
                     <td>$320,800</td>
                   </tr>
                 </tbody>
                 <tfoot>
                   <tr>
                     <th>Name</th>
-                    <th>Role</th>
+                    <th>Contribution type</th>
+                    <th>Transaction type</th>
                     <th>Transaction date</th>
+                    <th>Status</th>
                     <th>Amount</th>
                   </tr>
                 </tfoot>

@@ -3,7 +3,7 @@ import React from "react";
 import Select from "react-select";
 import { WEB_BASE_URL } from "./webbase";
 
-class SignUp extends React.Component {
+class Donate extends React.Component {
   constructor(props) {
     super(props);
 
@@ -129,7 +129,6 @@ class SignUp extends React.Component {
       lga: this.state.lgas,
       phone: this.state.phone,
     };
-    this.state.history.push("/complete-signUp", user);
   };
 
   componentDidMount() {
@@ -301,7 +300,9 @@ class SignUp extends React.Component {
                                 for="flexSwitchCheckChecked"
                               >
                                 I Agree to the{" "}
-                                <a href="/signUp">Terms & Conditions</a>
+                                <a href="/terms-conditions">
+                                  Terms & Conditions
+                                </a>
                               </label>
                             </div>
                           </div>
@@ -311,7 +312,7 @@ class SignUp extends React.Component {
                                 type="submit"
                                 className="btn btn-primary radius-30"
                               >
-                                Register
+                                Donate
                               </button>
                             </div>
                           </div>
@@ -335,4 +336,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+export default Donate;

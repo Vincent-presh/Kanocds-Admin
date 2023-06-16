@@ -14,19 +14,12 @@ class SideBar extends React.Component {
         <div className="sidebar-header">
           <div>
             <img
-              src="assets/images/logo-icon.png"
+              src="assets/images/kanocds.png"
               className="logo-icon"
               alt="logo icon"
             />
           </div>
-          <div>
-            <img
-              src="assets/images/llogo2.png"
-              className="logo-text"
-              style={{ maxWidth: "150px", padding: "10px" }}
-              alt="logo text"
-            />
-          </div>
+          <div></div>
           <div className="toggle-icon ms-auto">
             {" "}
             <i className="bi bi-list"></i>
@@ -35,41 +28,42 @@ class SideBar extends React.Component {
 
         <ul className="metismenu" id="menu">
           <li>
-            <a href="/">
-              <div className="parent-icon">
-                <i className="bi bi-house-fill"></i>
-              </div>
-              <div className="menu-title">Dashboard</div>
-            </a>
-          </li>
-          <li>
-            <a href="/transactions">
-              <div className="parent-icon">
-                <i className="bi bi-credit-card-fill"></i>
-              </div>
-              <div className="menu-title">Transactions</div>
-            </a>
-          </li>
-
-          <li>
             <a className="has-arrow" href="javascript:;">
               <div className="parent-icon">
                 <i className="bi bi-receipt"></i>
               </div>
-              <div className="menu-title">Manage Voucher</div>
+              <div className="menu-title">Contributions</div>
             </a>
             <ul>
               <li>
-                <a href="/generate-voucher">
-                  <i className="bi bi-circle"></i>Generate Voucher
+                <a href="/">
+                  <i className="bi bi-circle"></i>New Donation
                 </a>
               </li>
               <li>
-                <a href="/vouchers">
-                  <i className="bi bi-circle"></i> View Vouchers
+                <a href="/material">
+                  <i className="bi bi-circle"></i>Material Contribution
+                </a>
+              </li>
+              <li>
+                <a href="/expertise">
+                  <i className="bi bi-circle"></i>Expertise Contribution
+                </a>
+              </li>
+              <li>
+                <a href="/view-contributions">
+                  <i className="bi bi-circle"></i> View Contributions
                 </a>
               </li>
             </ul>
+          </li>
+          <li>
+            <a className="has-arrow" href="/profile">
+              <div className="parent-icon">
+                <i className="bi bi-person-lines-fill"></i>
+              </div>
+              <div className="menu-title">Profile</div>
+            </a>
           </li>
 
           <li>
@@ -77,64 +71,12 @@ class SideBar extends React.Component {
               <div className="parent-icon">
                 <i className="bi bi-wallet-fill"></i>
               </div>
-              <div className="menu-title">Manage Wallet</div>
+              <div className="menu-title">Projects Monitors</div>
             </a>
             <ul>
               <li>
                 <a href="/fund">
-                  <i className="bi bi-circle"></i>Fund Wallet
-                </a>
-              </li>
-              <li>
-                <a href="/transfer-fund">
-                  <i className="bi bi-circle"></i>Transfer Fund
-                </a>
-              </li>
-              <li>
-                <a href="/wallet-history">
-                  <i className="bi bi-circle"></i>Wallet History
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a className="has-arrow" href="javascript:;">
-              <div className="parent-icon">
-                <i className="bi bi-person-lines-fill"></i>
-              </div>
-              <div className="menu-title">Manage Users</div>
-            </a>
-            <ul>
-              <li>
-                <a href="/create-users">
-                  <i className="bi bi-circle"></i>Create User
-                </a>
-              </li>
-              <li>
-                <a href="/users">
-                  <i className="bi bi-circle"></i>Manage Users
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <li>
-            <a className="has-arrow" href="javascript:;">
-              <div className="parent-icon">
-                <i className="bi bi-gear-fill"></i>
-              </div>
-              <div className="menu-title">Settings</div>
-            </a>
-            <ul>
-              <li>
-                <a href="/profile">
-                  <i className="bi bi-circle"></i>View Profile
-                </a>
-              </li>
-
-              <li>
-                <a href="/edit-transaction-pin">
-                  <i className="bi bi-circle"></i>Edit Transaction Pin
+                  <i className="bi bi-circle"></i>All Projects
                 </a>
               </li>
             </ul>

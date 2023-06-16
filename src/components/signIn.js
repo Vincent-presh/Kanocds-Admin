@@ -16,17 +16,18 @@ class SignIn extends React.Component {
             <div class="authentication-card">
               <div class="card shadow rounded-0 overflow-hidden">
                 <div class="row g-0">
-                  <div class="col-lg-6 bg-login d-flex align-items-center justify-content-center">
+                  <div class="col-lg-6  d-flex align-items-center justify-content-center">
                     <img
-                      src="assets/images/error/login-img.png"
+                      src="assets/images/kanocds.png"
                       class="img-fluid"
                       alt=""
+                      style={{ maxWidth: "50%" }}
                     />
                   </div>
                   <div class="col-lg-6">
                     <div class="card-body p-4 p-sm-5">
                       <h5 class="card-title">Sign In</h5>
-                      <p class="card-text mb-5">Login to to get started!</p>
+                      <p class="card-text mb-2">Login to to get started!</p>
                       <form
                         class="form-body"
                         onSubmit={(event) => {
@@ -38,13 +39,13 @@ class SignIn extends React.Component {
                           <div class="col-12">
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                <i class="bi bi-envelope-fill"></i>
+                                <i class="bi bi-person-circle"></i>
                               </div>
                               <input
-                                type="email"
+                                type="phone"
                                 class="form-control radius-30 ps-5"
                                 id="inputEmailAddress"
-                                placeholder="Email Address"
+                                placeholder="Phone Number"
                                 required={true}
                               />
                             </div>
@@ -52,7 +53,7 @@ class SignIn extends React.Component {
                           <div class="col-12">
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                <i class="bi bi-lock-fill"></i>
+                                <i class="bi bi-key-fill"></i>
                               </div>
                               <input
                                 type="password"
