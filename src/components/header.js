@@ -1,11 +1,44 @@
+
 import React from "react";
+import { getFirestore, collection, getDocs, addDoc, getDoc, doc, runTransaction } from 'firebase/firestore/lite';
+import app from "../firebase";
+
 
 class Header extends React.Component {
   constructor() {
     super();
     this.state = {
+      db: getFirestore(app),
       someKey: "someValue",
+      visitors: 0,
     };
+  }
+
+  componentDidMount() {
+
+    const addViewCount = async () => {
+      const sitedocRef = doc(this.state.db, "stats", "siteStats");
+      try {
+        await runTransaction(this.state.db, async (transaction) => {
+          const sfDoc = await transaction.get(sitedocRef);
+          if (!sfDoc.exists()) {
+            this.setState({
+              visitors: 0,
+            })
+          } else {
+            const currentVisitors = sfDoc.data().visitors || 0;
+            this.setState({
+              visitors: currentVisitors,
+            })
+          }
+        });
+      } catch (e) {
+        console.log("Transaction failed: ", e);
+      }
+
+    }
+    addViewCount();
+
   }
 
   render() {
@@ -18,6 +51,15 @@ class Header extends React.Component {
 
           <div className="top-navbar-right ms-auto">
             <ul className="navbar-nav align-items-center">
+              <li className="nav-item dropdown dropdown-large">
+                <a
+                  className="nav-link dropdown-toggle dropdown-toggle-nocaret"
+                  href="#"
+                  data-bs-toggle="dropdown"
+                >
+                  Website Visitors: {this.state.visitors}
+                </a>
+              </li>
               <li className="nav-item dropdown dropdown-large">
                 <a
                   className="nav-link dropdown-toggle dropdown-toggle-nocaret"
@@ -143,11 +185,7 @@ class Header extends React.Component {
     );
   }
 
-  componentDidMount() {
-    this.setState({
-      someKey: "otherValue",
-    });
-  }
+
 }
 
 export default Header;
