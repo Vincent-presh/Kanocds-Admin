@@ -349,7 +349,7 @@ class Transaction extends React.Component {
                     <th>Transaction date</th>
                     <th>Status</th>
                     <th>Amount</th>
-                    <th>Amount</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -385,7 +385,7 @@ class Transaction extends React.Component {
                             this.confirmTransaction(inst.id);
                           }}
                         >
-                          Confirm
+                          Acknowledge
                         </a>
                       </td>
                     </tr>
